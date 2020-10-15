@@ -1,3 +1,9 @@
 
     --transpile-only = converte o codigo sem se preocupar com o erro
     --ignore-watch node_modules = não ficará observando as mudanças na pasta node_modules
+    
+    //Migrations
+
+     "migrations":["./src/database/migrations/*.ts"] - diretorio de leitura de arquivos migration
+
+     "cli":{"migrationsDir": "./src/database/migrations"} - diretorio para salvar as migrations
