@@ -8,7 +8,7 @@ export default{
 
     const orphanages = await orphanagesRepository.find();
 
-    return response.status(201).json(orphanages);
+    return response.json(orphanages);
   },
 
   async show(request: Request, response: Response){
@@ -18,35 +18,41 @@ export default{
 
     const orphanage = await orphanagesRepository.findOneOrFail(id);
 
-    return response.status(201).json(orphanage);
+    return response.json(orphanage);
   },
 
   async create(request: Request, response: Response){
-  const{
-    name,
-    latitude,
-    longitude,
-    about,
-    instructions,
-    opening_hours,
-    open_on_weekends
-  } = request.body;
+    const{
+      name,
+      latitude,
+      longitude,
+      about,
+      instructions,
+      opening_hours,
+      open_on_weekends
+    } = request.body;
 
-  const orphanagesRepository = getRepository(Orphanage);
+    const orphanagesRepository = getRepository(Orphanage);
 
-  const orphanage = orphanagesRepository.create({
-    name,
-    latitude,
-    longitude,
-    about,
-    instructions,
-    opening_hours,
-    open_on_weekends
-  });
+    const requestImages = request.files as Express.Multer.File[];
+    const images = requestImages.map(image => {
+      return {path: image.filename}
+    })
 
-  await orphanagesRepository.save(orphanage); 
-  //await executa ao restante do cod após linha em que está contido executar por completo
+    const orphanage = orphanagesRepository.create({
+      name,
+      latitude,
+      longitude,
+      about,
+      instructions,
+      opening_hours,
+      open_on_weekends,
+      images
+    });
 
-  return response.status(201).json(orphanage);
+    await orphanagesRepository.save(orphanage); 
+    //await executa ao restante do cod após linha em que está contido executar por completo
+
+    return response.status(201).json(orphanage);
 }
 }

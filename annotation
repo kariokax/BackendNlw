@@ -1,0 +1,43 @@
+    //comandos yarn (SCRIPTS PACKAGE.JSON)
+      --transpile-only -> converte o codigo sem se preocupar com o erro
+      --ignore-watch node_modules -> não ficará observando as mudanças na pasta node_modules
+          *Para typeorm
+            ./node_modules/typeorm/cli.js -> utilizado para apontar ao typeorm  que deseja usa-lo
+                                             com typeScript e não com javaScript que é o padrão.
+
+    //dependencias
+       *yarn add
+         typeorm (ORM "Object Relational Mapping") -> relaciona objetos com tabelas do banco de dados
+         integrado ao typeScript 
+         sqlite3 -> integração sqlite com node
+         multer -> biblioteca que lida com upload de imagens / arquivos
+    
+    //OrmConfig
+
+      "migrations":["./src/database/migrations/*.ts"] -> diretorio de leitura de arquivos migration
+
+      "cli":{"migrationsDir": "./src/database/migrations"} -> diretorio para salvar as migrations
+
+    //migrations
+       *Criação
+         yarn typeorm migration:create -n "nome da migration"
+       *Start
+         yarn typeorm migration:run  
+
+    //integração models com typeorm
+      *tsconfig
+        "strictPropertyInitialization": false -> não necessita inicializar variavel nem constructor na class
+        "experimentalDecorators": true -> Ativa o suporte experimental para decoradores ES7
+        "emitDecoratorMetadata": true -> Ativa o suporte experimental para a emissão de metadados de tipo para decorators 
+
+    //Annotations typeorm
+      @OneToMany recebe 3 parâmetros: 
+        1ºfunção que devolve o tipo do retorno
+        2º(image=>image.orphanage)->dado uma imagem recebida, qual o campo dela que retorna o 
+          relacionamento inverso
+        3º{[cascade:['insert', 'update']]}-> recebe  configurações, no caso, "cascade" que faz as alterações
+          das images ao inserir(insere a imagem) ou atualizar(atualiza a imagem) Orfanatos  
+      @JoinColumn  
+        {name: 'orphanage_id'}->recebe um objeto que identiifica o nome da coluna que armazena o 
+        relacionamento de orfanato com imagem
+
