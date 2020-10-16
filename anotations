@@ -10,6 +10,7 @@
          typeorm (ORM "Object Relational Mapping") -> relaciona objetos com tabelas do banco de dados
          integrado ao typeScript 
          sqlite3 -> integração sqlite com node
+         multer -> biblioteca que lida com upload de imagens / arquivos
     
     //OrmConfig
 
