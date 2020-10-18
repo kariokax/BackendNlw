@@ -11,7 +11,8 @@
          integrado ao typeScript 
          sqlite3 -> integração sqlite com node
          multer -> biblioteca que lida com upload de imagens / arquivos
-         express-async-error -> usado para capturar automaticamente o erro em metodo async no controller 
+         express-async-error -> usado para capturar automaticamente o erro em metodo async no controller
+         cors -> permite a aplicação ser acessível de qualquer domínio 
     
     //OrmConfig
 
